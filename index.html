@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YOUR BRAND NAME — Visual Art • Original Music</title>
+  <!-- Optional Google Fonts (gracefully falls back to crisp system sans-serif in restricted iframes) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ==========================================================================
+       DESIGN TOKENS & GALLERY DARK MODE PALETTE (BLACK, PURPLE, PINK, BLUE)
+       ========================================================================== */
+    :root {
+      --bg-canvas: #09090D;
+      --bg-card: rgba(20, 18, 30, 0.65);
+      --bg-card-hover: rgba(28, 24, 44, 0.78);
+      --border-subtle: rgba(168, 85, 247, 0.22);
+      --border-accent: rgba(236, 72, 153, 0.58);
+      --text-primary: #FFFFFF;
+      --text-secondary: #B8B3CC;
+      --text-muted: #7C7694;
+      --accent-purple: #8B5CF6;
+      --accent-pink: #EC4899;
+      --accent-blue: #3B82F6;
+      --gradient-primary: linear-gradient(135deg, #EC4899 0%, #8B5CF6 52%, #3B82F6 100%);
+      --gradient-primary-hover: linear-gradient(135deg, #F472B6 0%, #9D71FA 52%, #60A5FA 100%);
+      --gradient-badge: linear-gradient(135deg, rgba(236, 72, 153, 0.22) 0%, rgba(139, 92, 246, 0.22) 100%);
+      --text-on-accent: #FFFFFF;
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --radius-pill: 9999px;
+      --transition-smooth: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* ==========================================================================
+       RESET & BASE STYLES (GOOGLE SITES IFRAME FRIENDLY)
+       ========================================================================== */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      background-color: var(--bg-canvas);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background-color: var(--bg-canvas);
+      color: var(--text-primary);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 28px 16px 48px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Subtle Ambient Gallery Lighting in Background */
+    .ambient-glow {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(circle at 22% 4%, rgba(236, 72, 153, 0.16) 0%, rgba(236, 72, 153, 0.03) 34%, transparent 62%),
+        radial-gradient(circle at 78% 14%, rgba(59, 130, 246, 0.16) 0%, rgba(59, 130, 246, 0.03) 36%, transparent 65%),
+        radial-gradient(circle at 50% 52%, rgba(139, 92, 246, 0.14) 0%, transparent 58%),
+        radial-gradient(circle at 82% 86%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
+    }
+
+    /* ==========================================================================
+       CENTERED MOBILE CONTAINER (MAX-WIDTH: 480PX)
+       ========================================================================== */
+    .app-container {
+      width: 100%;
+      max-width: 480px;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Staggered Entrance Animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ==========================================================================
+       FROSTED GLASS CARD BASE
+       ========================================================================== */
+    .glass-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: var(--transition-smooth);
+    }
+
+    /* ==========================================================================
+       1. PROFILE HEADER
+       ========================================================================== */
+    .profile-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 8px 8px 4px;
+    }
+
+    .avatar-ring {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      padding: 3px;
+      background: linear-gradient(135deg, #EC4899 0%, #8B5CF6 50%, #3B82F6 100%);
+      box-shadow:
+        0 0 28px rgba(139, 92, 246, 0.35),
+        0 0 16px rgba(236, 72, 153, 0.25),
+        0 8px 24px rgba(0, 0, 0, 0.65);
+      margin-bottom: 16px;
+      transition: var(--transition-smooth);
+      position: relative;
+    }
+
+    .avatar-ring:hover {
+      transform: scale(1.04);
+      box-shadow:
+        0 0 36px rgba(236, 72, 153, 0.42),
+        0 0 24px rgba(59, 130, 246, 0.32),
+        0 10px 28px rgba(0, 0, 0, 0.72);
+    }
+
+    .avatar-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+      background: #0F0D1A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .avatar-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .brand-title {
+      font-family: 'Space Grotesk', 'Inter', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      line-height: 1.2;
+      margin-bottom: 6px;
+      text-shadow: 0 2px 18px rgba(139, 92, 246, 0.25);
+    }
+
+    .brand-tagline {
+      font-size: 0.88rem;
+      font-weight: 400;
+      color: var(--text-secondary);
+      letter-spacing: 0.015em;
+      line-height: 1.45;
+      margin-bottom: 18px;
+    }
+
+    /* Social Media Icon Row */
+    .social-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .social-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: var(--transition-smooth);
+    }
+
+    .social-btn svg {
+      width: 19px;
+      height: 19px;
+      transition: transform 0.25s ease, color 0.25s ease;
+    }
+
+    .social-btn:hover,
+    .social-btn:focus-visible {
+      background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(139, 92, 246, 0.22), rgba(59, 130, 246, 0.2));
+      border-color: var(--border-accent);
+      color: #F472B6;
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45), 0 0 16px rgba(139, 92, 246, 0.28);
+      outline: none;
+    }
+
+    .social-btn:nth-child(even):hover,
+    .social-btn:nth-child(even):focus-visible {
+      color: #60A5FA;
+      border-color: rgba(59, 130, 246, 0.6);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45), 0 0 16px rgba(59, 130, 246, 0.28);
+    }
+
+    .social-btn:active {
+      transform: scale(0.96);
+    }
+
+    /* ==========================================================================
+       2. PRIMARY FEATURED DROP CARD
+       ========================================================================== */
+    .featured-card {
+      padding: 18px;
+      border-color: rgba(168, 85, 247, 0.34);
+      background: linear-gradient(165deg, rgba(28, 22, 46, 0.75) 0%, rgba(15, 14, 24, 0.72) 100%);
+      box-shadow:
+        0 18px 42px rgba(0, 0, 0, 0.55),
+        0 0 28px rgba(139, 92, 246, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .featured-card:hover {
+      border-color: rgba(236, 72, 153, 0.62);
+      background: linear-gradient(165deg, rgba(35, 26, 58, 0.84) 0%, rgba(18, 17, 30, 0.8) 100%);
+      transform: translateY(-2px);
+      box-shadow:
+        0 22px 48px rgba(0, 0, 0, 0.62),
+        0 0 32px rgba(236, 72, 153, 0.18),
+        0 0 20px rgba(59, 130, 246, 0.14);
+    }
+
+    .featured-top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .badge-new-drop {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      background: var(--gradient-badge);
+      border: 1px solid rgba(236, 72, 153, 0.5);
+      color: #F9A8D4;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      box-shadow: 0 0 14px rgba(236, 72, 153, 0.2);
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #EC4899, #8B5CF6);
+      box-shadow: 0 0 8px #EC4899;
+      animation: pulseDot 2.2s infinite ease-in-out;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(0.8); }
+    }
+
+    .featured-edition-tag {
+      font-size: 0.74rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .featured-body {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Square Artwork Thumbnail */
+    .artwork-thumb-wrap {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid rgba(168, 85, 247, 0.28);
+      background: #0D0B16;
+      position: relative;
+    }
+
+    .artwork-thumb-wrap img,
+    .artwork-thumb-wrap svg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .featured-card:hover .artwork-thumb-wrap img,
+    .featured-card:hover .artwork-thumb-wrap svg {
+      transform: scale(1.028);
+    }
+
+    .featured-info {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .featured-title {
+      font-family: 'Space Grotesk', 'Inter', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+
+    .featured-desc {
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Primary Gradient CTA Button (Pink -> Purple -> Blue) */
+    .btn-primary-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 14px 20px;
+      margin-top: 4px;
+      border-radius: var(--radius-md);
+      background: var(--gradient-primary);
+      color: var(--text-on-accent);
+      font-size: 0.94rem;
+      font-weight: 700;
+      letter-spacing: 0.015em;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      cursor: pointer;
+      box-shadow:
+        0 8px 24px rgba(139, 92, 246, 0.34),
+        0 4px 14px rgba(236, 72, 153, 0.25);
+      transition: var(--transition-smooth);
+    }
+
+    .btn-primary-cta:hover,
+    .btn-primary-cta:focus-visible {
+      background: var(--gradient-primary-hover);
+      transform: translateY(-2px);
+      box-shadow:
+        0 12px 30px rgba(236, 72, 153, 0.42),
+        0 6px 22px rgba(59, 130, 246, 0.35);
+      outline: none;
+    }
+
+    .btn-primary-cta:active {
+      transform: translateY(0) scale(0.985);
+    }
+
+    .btn-primary-cta svg {
+      width: 17px;
+      height: 17px;
+      transition: transform 0.25s ease;
+    }
+
+    .btn-primary-cta:hover svg {
+      transform: translateX(3px);
+    }
+
+    /* ==========================================================================
+       3. STOREFRONT BUTTON
+       ========================================================================== */
+    .btn-storefront {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 16px 20px;
+      border-radius: var(--radius-lg);
+      background: var(--bg-card);
+      border: 1px solid rgba(139, 92, 246, 0.34);
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.38);
+      transition: var(--transition-smooth);
+    }
+
+    .btn-storefront:hover,
+    .btn-storefront:focus-visible {
+      background: linear-gradient(135deg, rgba(236, 72, 153, 0.14), rgba(139, 92, 246, 0.18), rgba(59, 130, 246, 0.16));
+      border-color: rgba(236, 72, 153, 0.62);
+      color: #FFFFFF;
+      transform: translateY(-2px);
+      box-shadow:
+        0 12px 32px rgba(0, 0, 0, 0.48),
+        0 0 22px rgba(139, 92, 246, 0.24),
+        0 0 14px rgba(59, 130, 246, 0.18);
+      outline: none;
+    }
+
+    .btn-storefront:active {
+      transform: scale(0.985);
+    }
+
+    .btn-storefront svg {
+      width: 19px;
+      height: 19px;
+      flex-shrink: 0;
+      color: #60A5FA;
+      transition: color 0.25s ease, transform 0.25s ease;
+    }
+
+    .btn-storefront:hover svg {
+      color: #F472B6;
+      transform: scale(1.08);
+    }
+
+    /* ==========================================================================
+       4. MUSIC & SPOTIFY SECTION
+       ========================================================================== */
+    .section-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .section-subheader {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 4px;
+    }
+
+    .section-subheader h2 {
+      font-family: 'Space Grotesk', 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-subheader h2::before {
+      content: '';
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #EC4899, #8B5CF6, #3B82F6);
+      box-shadow: 0 0 8px rgba(139, 92, 246, 0.7);
+    }
+
+    .spotify-container {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .spotify-container:hover {
+      border-color: rgba(139, 92, 246, 0.45);
+    }
+
+    .spotify-slot {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .spotify-slot-label {
+      font-size: 0.74rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      padding-left: 2px;
+    }
+
+    .spotify-embed-frame {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid rgba(168, 85, 247, 0.18);
+      display: block;
+      background: rgba(9, 9, 13, 0.55);
+    }
+
+    /* ==========================================================================
+       5. EMAIL NEWSLETTER FUNNEL BOX
+       ========================================================================== */
+    .newsletter-card {
+      padding: 22px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      background: linear-gradient(180deg, rgba(24, 20, 38, 0.74) 0%, rgba(16, 15, 26, 0.68) 100%);
+    }
+
+    .newsletter-card:hover {
+      border-color: rgba(236, 72, 153, 0.52);
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45), 0 0 24px rgba(139, 92, 246, 0.14);
+    }
+
+    .newsletter-header h2 {
+      font-family: 'Space Grotesk', 'Inter', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .newsletter-header p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .newsletter-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .newsletter-input-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .newsletter-input {
+      flex: 1;
+      min-width: 0;
+      padding: 13px 14px;
+      border-radius: var(--radius-md);
+      background: rgba(9, 9, 13, 0.82);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.9rem;
+      transition: var(--transition-smooth);
+    }
+
+    .newsletter-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .newsletter-input:focus {
+      outline: none;
+      border-color: var(--accent-purple);
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.22);
+    }
+
+    .btn-subscribe {
+      padding: 13px 18px;
+      border-radius: var(--radius-md);
+      background: var(--gradient-primary);
+      color: var(--text-on-accent);
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 700;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      cursor: pointer;
+      white-space: nowrap;
+      box-shadow: 0 6px 18px rgba(139, 92, 246, 0.28);
+      transition: var(--transition-smooth);
+    }
+
+    .btn-subscribe:hover,
+    .btn-subscribe:focus-visible {
+      background: var(--gradient-primary-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 22px rgba(236, 72, 153, 0.36);
+      outline: none;
+    }
+
+    .btn-subscribe:active {
+      transform: scale(0.97);
+    }
+
+    .newsletter-feedback {
+      display: none;
+      font-size: 0.82rem;
+      padding: 10px 12px;
+      border-radius: 10px;
+      line-height: 1.4;
+    }
+
+    .newsletter-feedback.success {
+      display: block;
+      background: rgba(139, 92, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.42);
+      color: #DDD6FE;
+    }
+
+    .newsletter-feedback.error {
+      display: block;
+      background: rgba(236, 72, 153, 0.15);
+      border: 1px solid rgba(236, 72, 153, 0.45);
+      color: #FBCFE8;
+    }
+
+    /* ==========================================================================
+       6. MINIMAL FOOTER
+       ========================================================================== */
+    .minimal-footer {
+      text-align: center;
+      padding: 8px 12px 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: var(--transition-smooth);
+    }
+
+    .footer-link:hover {
+      color: #F472B6;
+      border-bottom-color: #EC4899;
+    }
+
+    /* ==========================================================================
+       MOBILE RESPONSIVE TWEAKS (< 380px)
+       ========================================================================== */
+    @media (max-width: 380px) {
+      body {
+        padding: 20px 12px 40px;
+      }
+
+      .newsletter-input-row {
+        flex-direction: column;
+      }
+
+      .btn-subscribe {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Subtle Ambient Gallery Background Lighting -->
+  <div class="ambient-glow" aria-hidden="true"></div>
+
+  <!-- Centered Mobile Container (max-width: 480px) -->
+  <main class="app-container">
+
+    <!-- ======================================================================
+         1. PROFILE HEADER
+         ====================================================================== -->
+    <header class="profile-header reveal">
+      <div class="avatar-ring">
+        <div class="avatar-inner">
+          <!-- REPLACE THE SVG BELOW WITH YOUR OWN <img> TAG, e.g.:
+               <img src="https://yourdomain.com/avatar.jpg" alt="YOUR BRAND NAME Avatar" /> -->
+          <svg viewBox="0 0 100 100" width="100" height="100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Artist Avatar Placeholder">
+            <defs>
+              <radialGradient id="avatarGrad" cx="35%" cy="28%" r="78%">
+                <stop offset="0%" stop-color="#271B42" />
+                <stop offset="55%" stop-color="#131122" />
+                <stop offset="100%" stop-color="#09090D" />
+              </radialGradient>
+              <linearGradient id="neonStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#EC4899" />
+                <stop offset="50%" stop-color="#8B5CF6" />
+                <stop offset="100%" stop-color="#3B82F6" />
+              </linearGradient>
+            </defs>
+            <rect width="100" height="100" fill="url(#avatarGrad)" />
+            <circle cx="50" cy="39" r="16" fill="none" stroke="url(#neonStroke)" stroke-width="2.4" />
+            <path d="M23 82 C23 65, 77 65, 77 82" fill="none" stroke="url(#neonStroke)" stroke-width="2.4" stroke-linecap="round" />
+            <circle cx="73" cy="25" r="3" fill="#EC4899" opacity="0.9" />
+            <circle cx="27" cy="28" r="2.2" fill="#3B82F6" opacity="0.85" />
+          </svg>
+        </div>
+      </div>
+
+      <h1 class="brand-title">YOUR BRAND NAME</h1>
+      <p class="brand-tagline">Visual Art &bull; Original Music &bull; Curated Vibes</p>
+
+      <!-- Minimalist SVG Social Media Icon Buttons -->
+      <nav class="social-row" aria-label="Social Media Links">
+        <!-- Instagram -->
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2.5" y="2.5" width="19" height="19" rx="5" />
+            <circle cx="12" cy="12" r="4" />
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+          </svg>
+        </a>
+
+        <!-- TikTok -->
+        <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="TikTok">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+          </svg>
+        </a>
+
+        <!-- Spotify -->
+        <a href="https://open.spotify.com" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Spotify">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="9.5" />
+            <path d="M7.5 10.2c3.2-1 6.8-.7 9.5.8" />
+            <path d="M8.3 13.2c2.5-.7 5.3-.5 7.5.7" />
+            <path d="M9.1 16c1.9-.5 4-.4 5.7.5" />
+          </svg>
+        </a>
+
+        <!-- YouTube -->
+        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2.5" y="5" width="19" height="14" rx="4" />
+            <polygon points="10 9 15.5 12 10 15 10 9" fill="currentColor" stroke="none" />
+          </svg>
+        </a>
+      </nav>
+    </header>
+
+    <!-- ======================================================================
+         2. PRIMARY FEATURED DROP CARD (TOP PRIORITY)
+         ====================================================================== -->
+    <section class="glass-card featured-card reveal" aria-labelledby="featured-drop-title">
+      <div class="featured-top-bar">
+        <span class="badge-new-drop">
+          <span class="badge-dot" aria-hidden="true"></span>
+          NEW DROP
+        </span>
+        <span class="featured-edition-tag">Signed &amp; Numbered</span>
+      </div>
+
+      <div class="featured-body">
+        <!-- Square Artwork Thumbnail Placeholder -->
+        <div class="artwork-thumb-wrap">
+          <!-- REPLACE THE SVG BELOW WITH YOUR SQUARE DROP ARTWORK IMAGE, e.g.:
+               <img src="https://yourdomain.com/featured-drop.jpg" alt="Limited Edition Print & Merch Collection" /> -->
+          <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Featured Artwork Preview">
+            <defs>
+              <linearGradient id="artBg" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#170F29" />
+                <stop offset="50%" stop-color="#09090D" />
+                <stop offset="100%" stop-color="#0E172E" />
+              </linearGradient>
+              <radialGradient id="pinkOrb" cx="44%" cy="42%" r="38%">
+                <stop offset="0%" stop-color="#EC4899" stop-opacity="0.88" />
+                <stop offset="55%" stop-color="#8B5CF6" stop-opacity="0.32" />
+                <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0" />
+              </radialGradient>
+              <radialGradient id="blueOrb" cx="62%" cy="54%" r="34%">
+                <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.72" />
+                <stop offset="65%" stop-color="#3B82F6" stop-opacity="0.14" />
+                <stop offset="100%" stop-color="#3B82F6" stop-opacity="0" />
+              </radialGradient>
+              <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#EC4899" />
+                <stop offset="50%" stop-color="#8B5CF6" />
+                <stop offset="100%" stop-color="#3B82F6" />
+              </linearGradient>
+            </defs>
+            <rect width="400" height="400" fill="url(#artBg)" />
+            <circle cx="185" cy="175" r="150" fill="url(#pinkOrb)" />
+            <circle cx="235" cy="205" r="135" fill="url(#blueOrb)" />
+            <circle cx="200" cy="184" r="74" fill="none" stroke="url(#waveGrad)" stroke-width="2" stroke-opacity="0.85" />
+            <circle cx="200" cy="184" r="108" fill="none" stroke="#B8B3CC" stroke-width="0.9" stroke-opacity="0.28" stroke-dasharray="4 6" />
+            <path d="M40 285 Q130 230 200 275 T360 255" fill="none" stroke="url(#waveGrad)" stroke-width="2.4" stroke-opacity="0.9" />
+            <path d="M40 310 Q145 265 215 300 T360 285" fill="none" stroke="#3B82F6" stroke-width="1.2" stroke-opacity="0.45" />
+            <text x="200" y="362" text-anchor="middle" fill="#B8B3CC" font-family="sans-serif" font-size="11" letter-spacing="4">GALLERY EDITION 01</text>
+          </svg>
+        </div>
+
+        <div class="featured-info">
+          <h2 id="featured-drop-title" class="featured-title">Limited Edition Print &amp; Merch Collection</h2>
+          <p class="featured-desc">Archival museum-grade gicl&eacute;e prints, heavyweight apparel, and custom vinyl pressings available for a limited window.</p>
+        </div>
+
+        <a href="https://mybrand.com" target="_blank" rel="noopener noreferrer" class="btn-primary-cta">
+          <span>Shop the Collection</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         3. STOREFRONT BUTTON
+         ====================================================================== -->
+    <div class="reveal">
+      <a href="https://mybrand.com" target="_blank" rel="noopener noreferrer" class="btn-storefront">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 7h12l1 13H5L6 7z" />
+          <path d="M9 7V5a3 3 0 0 1 6 0v2" />
+        </svg>
+        <span>Shop Full Art &amp; Merch Store</span>
+      </a>
+    </div>
+
+    <!-- ======================================================================
+         4. MUSIC & SPOTIFY SECTION
+         ====================================================================== -->
+    <section class="section-group reveal" aria-labelledby="listen-vibe-heading">
+      <div class="section-subheader">
+        <h2 id="listen-vibe-heading">Listen &amp; Vibe</h2>
+      </div>
+
+      <div class="glass-card spotify-container">
+        <!-- EMBED 1: SPOTIFY ARTIST PROFILE / LATEST SINGLE -->
+        <div class="spotify-slot">
+          <span class="spotify-slot-label">Latest Release &amp; Artist Profile</span>
+          <!-- ================================================================
+               PASTE YOUR SPOTIFY ARTIST OR TRACK EMBED URL IN THE `src` BELOW
+               (In Spotify: Share -> Embed Track/Artist -> Copy src URL)
+               ================================================================ -->
+          <iframe
+            class="spotify-embed-frame"
+            title="Spotify Artist Profile / Latest Single"
+            src="https://open.spotify.com/embed/track/4cOdK2wGLETKBW3PvgPWqT?utm_source=generator&theme=0"
+            width="100%"
+            height="152"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy">
+          </iframe>
+        </div>
+
+        <!-- EMBED 2: CURATED VIBE PLAYLIST -->
+        <div class="spotify-slot">
+          <span class="spotify-slot-label">Curated Studio &amp; Vibe Playlist</span>
+          <!-- ================================================================
+               PASTE YOUR SPOTIFY PLAYLIST EMBED URL IN THE `src` BELOW
+               (In Spotify: Share -> Embed Playlist -> Copy src URL)
+               ================================================================ -->
+          <iframe
+            class="spotify-embed-frame"
+            title="Spotify Curated Vibe Playlist"
+            src="https://open.spotify.com/embed/playlist/37i9dQZF1DX4sWSpwq3LiO?utm_source=generator&theme=0"
+            width="100%"
+            height="352"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         5. EMAIL NEWSLETTER FUNNEL BOX
+         ====================================================================== -->
+    <section class="glass-card newsletter-card reveal" aria-labelledby="newsletter-heading">
+      <div class="newsletter-header">
+        <h2 id="newsletter-heading">Join the Inner Circle</h2>
+        <p>Get early access to new art drops, exclusive prints, and unreleased tracks.</p>
+      </div>
+
+      <!-- PASTE KIT / MAILERLITE EMBED CODE HERE -->
+      <form id="newsletterForm" class="newsletter-form" novalidate>
+        <div class="newsletter-input-row">
+          <input
+            type="email"
+            id="subscriberEmail"
+            name="email"
+            class="newsletter-input"
+            placeholder="Enter your email address..."
+            aria-label="Email address"
+            required
+          />
+          <button type="submit" class="btn-subscribe">Subscribe</button>
+        </div>
+        <div id="newsletterFeedback" class="newsletter-feedback" role="status" aria-live="polite"></div>
+      </form>
+      <!-- END KIT / MAILERLITE EMBED CODE -->
+    </section>
+
+    <!-- ======================================================================
+         6. MINIMAL FOOTER
+         ====================================================================== -->
+    <footer class="minimal-footer reveal">
+      <div class="footer-links">
+        <a href="mailto:hello@mybrand.com?subject=Commission%20%2F%20Inquiry" class="footer-link">Contact / Commissions</a>
+      </div>
+      <p>&copy; 2026 Your Brand Name. All rights reserved.</p>
+    </footer>
+
+  </main>
+
+  <script>
+    /**
+     * Staggered entrance animation & interactive newsletter placeholder handler.
+     * Self-contained with zero external dependencies for clean Google Sites embedding.
+     */
+    (function () {
+      // 1. Staggered reveal on load
+      const revealElements = document.querySelectorAll('.reveal');
+      revealElements.forEach((el, index) => {
+        setTimeout(() => {
+          el.classList.add('is-visible');
+        }, 70 * index);
+      });
+
+      // 2. Placeholder Newsletter Form Interaction
+      const form = document.getElementById('newsletterForm');
+      const emailInput = document.getElementById('subscriberEmail');
+      const feedback = document.getElementById('newsletterFeedback');
+
+      if (form && emailInput && feedback) {
+        form.addEventListener('submit', function (event) {
+          event.preventDefault();
+          const email = emailInput.value.trim();
+          const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+          feedback.className = 'newsletter-feedback';
+
+          if (!isValidEmail) {
+            feedback.textContent = 'Please enter a valid email address to join.';
+            feedback.classList.add('error');
+            emailInput.focus();
+            return;
+          }
+
+          feedback.textContent = 'Welcome to the Inner Circle! Check your inbox soon for early access.';
+          feedback.classList.add('success');
+          emailInput.value = '';
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
