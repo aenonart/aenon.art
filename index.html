@@ -1,17 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- ==========================================================================
+       DOCUMENT METADATA & HEAD CONFIGURATION
+       ========================================================================== -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ÆN0N.ART — Visual Art • Original Music</title>
-  <!-- Optional Google Fonts (gracefully falls back to crisp system sans-serif in restricted iframes) -->
+
+  <!-- Open Graph & Social Media Preview Meta Tags (For Instagram, Discord, iMessage, X) -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aenon.art/">
+  <meta property="og:title" content="ÆN0N.ART | Visual Art & Music">
+  <meta property="og:description" content="Visual Art • Original Music • Curated Vibes. Explore the latest drops, music, and merch store.">
+  <meta property="og:image" content="https://aenon.art/preview-banner.jpg">
+
+  <!-- Twitter / X Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://aenon.art/">
+  <meta name="twitter:title" content="ÆN0N.ART | Visual Art & Music">
+  <meta name="twitter:description" content="Visual Art • Original Music • Curated Vibes. Explore the latest drops, music, and merch store.">
+  <meta name="twitter:image" content="https://aenon.art/preview-banner.jpg">
+
+  <!-- Google Fonts Preconnect & Stylesheets (Inter & Space Grotesk) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
 
   <style>
     /* ==========================================================================
-       DESIGN TOKENS & GALLERY DARK MODE PALETTE (BLACK, PURPLE, PINK, BLUE)
+       DESIGN TOKENS & GALLERY DARK MODE PALETTE
+       Defines global color variables, gradients, border radii, and transitions.
        ========================================================================== */
     :root {
       --bg-canvas: #09090D;
@@ -37,7 +56,8 @@
     }
 
     /* ==========================================================================
-       RESET & BASE STYLES (GOOGLE SITES IFRAME FRIENDLY)
+       GLOBAL RESET & BASE LAYOUT
+       Normalizes box sizing and establishes the dark background canvas.
        ========================================================================== */
     *,
     *::before,
@@ -50,9 +70,8 @@
     html {
       background-color: var(--bg-canvas);
       color: var(--text-primary);
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
       scroll-behavior: smooth;
     }
 
@@ -68,7 +87,7 @@
       overflow-x: hidden;
     }
 
-    /* Subtle Ambient Gallery Lighting in Background */
+    /* Ambient background glow layers for artistic gallery lighting */
     .ambient-glow {
       position: fixed;
       inset: 0;
@@ -82,7 +101,8 @@
     }
 
     /* ==========================================================================
-       CENTERED MOBILE CONTAINER (MAX-WIDTH: 480PX)
+       CENTERED MOBILE APP CONTAINER
+       Restricts content width to 480px for a clean mobile link-in-bio look on desktop.
        ========================================================================== */
     .app-container {
       width: 100%;
@@ -94,7 +114,7 @@
       gap: 20px;
     }
 
-    /* Staggered Entrance Animation */
+    /* Staggered load animation classes */
     .reveal {
       opacity: 0;
       transform: translateY(14px);
@@ -107,9 +127,7 @@
       transform: translateY(0);
     }
 
-    /* ==========================================================================
-       FROSTED GLASS CARD BASE
-       ========================================================================== */
+    /* Frosted glass container styling */
     .glass-card {
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
@@ -120,7 +138,8 @@
     }
 
     /* ==========================================================================
-       1. PROFILE HEADER
+       1. PROFILE HEADER SECTION
+       Houses the brand avatar ring, title, tagline, and social icon buttons.
        ========================================================================== */
     .profile-header {
       display: flex;
@@ -147,10 +166,6 @@
 
     .avatar-ring:hover {
       transform: scale(1.04);
-      box-shadow:
-        0 0 36px rgba(236, 72, 153, 0.42),
-        0 0 24px rgba(59, 130, 246, 0.32),
-        0 10px 28px rgba(0, 0, 0, 0.72);
     }
 
     .avatar-inner {
@@ -228,23 +243,12 @@
       border-color: var(--border-accent);
       color: #F472B6;
       transform: translateY(-2px) scale(1.05);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45), 0 0 16px rgba(139, 92, 246, 0.28);
       outline: none;
-    }
-
-    .social-btn:nth-child(even):hover,
-    .social-btn:nth-child(even):focus-visible {
-      color: #60A5FA;
-      border-color: rgba(59, 130, 246, 0.6);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45), 0 0 16px rgba(59, 130, 246, 0.28);
-    }
-
-    .social-btn:active {
-      transform: scale(0.96);
     }
 
     /* ==========================================================================
        2. PRIMARY FEATURED DROP CARD
+       Highlights your main art release or collection with custom gradient borders.
        ========================================================================== */
     .featured-card {
       padding: 18px;
@@ -260,12 +264,7 @@
 
     .featured-card:hover {
       border-color: rgba(236, 72, 153, 0.62);
-      background: linear-gradient(165deg, rgba(35, 26, 58, 0.84) 0%, rgba(18, 17, 30, 0.8) 100%);
       transform: translateY(-2px);
-      box-shadow:
-        0 22px 48px rgba(0, 0, 0, 0.62),
-        0 0 32px rgba(236, 72, 153, 0.18),
-        0 0 20px rgba(59, 130, 246, 0.14);
     }
 
     .featured-top-bar {
@@ -288,7 +287,6 @@
       font-weight: 700;
       letter-spacing: 0.09em;
       text-transform: uppercase;
-      box-shadow: 0 0 14px rgba(236, 72, 153, 0.2);
     }
 
     .badge-dot {
@@ -317,7 +315,6 @@
       gap: 16px;
     }
 
-    /* Square Artwork Thumbnail */
     .artwork-thumb-wrap {
       width: 100%;
       aspect-ratio: 1 / 1;
@@ -362,7 +359,7 @@
       line-height: 1.5;
     }
 
-    /* Primary Gradient CTA Button (Pink -> Purple -> Blue) */
+    /* Primary Gradient CTA Button */
     .btn-primary-cta {
       display: inline-flex;
       align-items: center;
@@ -376,13 +373,10 @@
       color: var(--text-on-accent);
       font-size: 0.94rem;
       font-weight: 700;
-      letter-spacing: 0.015em;
       text-decoration: none;
       border: 1px solid rgba(255, 255, 255, 0.16);
       cursor: pointer;
-      box-shadow:
-        0 8px 24px rgba(139, 92, 246, 0.34),
-        0 4px 14px rgba(236, 72, 153, 0.25);
+      box-shadow: 0 8px 24px rgba(139, 92, 246, 0.34);
       transition: var(--transition-smooth);
     }
 
@@ -390,28 +384,11 @@
     .btn-primary-cta:focus-visible {
       background: var(--gradient-primary-hover);
       transform: translateY(-2px);
-      box-shadow:
-        0 12px 30px rgba(236, 72, 153, 0.42),
-        0 6px 22px rgba(59, 130, 246, 0.35);
       outline: none;
     }
 
-    .btn-primary-cta:active {
-      transform: translateY(0) scale(0.985);
-    }
-
-    .btn-primary-cta svg {
-      width: 17px;
-      height: 17px;
-      transition: transform 0.25s ease;
-    }
-
-    .btn-primary-cta:hover svg {
-      transform: translateX(3px);
-    }
-
     /* ==========================================================================
-       3. STOREFRONT BUTTON
+       3. STOREFRONT BUTTON (Points to shop.aenon.art)
        ========================================================================== */
     .btn-storefront {
       display: flex;
@@ -428,8 +405,6 @@
       font-weight: 600;
       text-decoration: none;
       backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.38);
       transition: var(--transition-smooth);
     }
 
@@ -437,34 +412,19 @@
     .btn-storefront:focus-visible {
       background: linear-gradient(135deg, rgba(236, 72, 153, 0.14), rgba(139, 92, 246, 0.18), rgba(59, 130, 246, 0.16));
       border-color: rgba(236, 72, 153, 0.62);
-      color: #FFFFFF;
       transform: translateY(-2px);
-      box-shadow:
-        0 12px 32px rgba(0, 0, 0, 0.48),
-        0 0 22px rgba(139, 92, 246, 0.24),
-        0 0 14px rgba(59, 130, 246, 0.18);
       outline: none;
-    }
-
-    .btn-storefront:active {
-      transform: scale(0.985);
     }
 
     .btn-storefront svg {
       width: 19px;
       height: 19px;
-      flex-shrink: 0;
       color: #60A5FA;
-      transition: color 0.25s ease, transform 0.25s ease;
-    }
-
-    .btn-storefront:hover svg {
-      color: #F472B6;
-      transform: scale(1.08);
     }
 
     /* ==========================================================================
-       4. MUSIC & SPOTIFY SECTION
+       4. MUSIC & SPOTIFY EMBEDS SECTION
+       Displays responsive Spotify audio frames for latest releases and playlists.
        ========================================================================== */
     .section-group {
       display: flex;
@@ -498,7 +458,6 @@
       height: 7px;
       border-radius: 50%;
       background: linear-gradient(135deg, #EC4899, #8B5CF6, #3B82F6);
-      box-shadow: 0 0 8px rgba(139, 92, 246, 0.7);
     }
 
     .spotify-container {
@@ -506,10 +465,6 @@
       display: flex;
       flex-direction: column;
       gap: 14px;
-    }
-
-    .spotify-container:hover {
-      border-color: rgba(139, 92, 246, 0.45);
     }
 
     .spotify-slot {
@@ -537,6 +492,7 @@
 
     /* ==========================================================================
        5. EMAIL NEWSLETTER FUNNEL BOX
+       Interactive input box for collecting fan emails for early drops and tracks.
        ========================================================================== */
     .newsletter-card {
       padding: 22px 20px;
@@ -544,11 +500,6 @@
       flex-direction: column;
       gap: 14px;
       background: linear-gradient(180deg, rgba(24, 20, 38, 0.74) 0%, rgba(16, 15, 26, 0.68) 100%);
-    }
-
-    .newsletter-card:hover {
-      border-color: rgba(236, 72, 153, 0.52);
-      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45), 0 0 24px rgba(139, 92, 246, 0.14);
     }
 
     .newsletter-header h2 {
@@ -589,10 +540,6 @@
       transition: var(--transition-smooth);
     }
 
-    .newsletter-input::placeholder {
-      color: var(--text-muted);
-    }
-
     .newsletter-input:focus {
       outline: none;
       border-color: var(--accent-purple);
@@ -610,20 +557,7 @@
       border: 1px solid rgba(255, 255, 255, 0.14);
       cursor: pointer;
       white-space: nowrap;
-      box-shadow: 0 6px 18px rgba(139, 92, 246, 0.28);
       transition: var(--transition-smooth);
-    }
-
-    .btn-subscribe:hover,
-    .btn-subscribe:focus-visible {
-      background: var(--gradient-primary-hover);
-      transform: translateY(-1px);
-      box-shadow: 0 8px 22px rgba(236, 72, 153, 0.36);
-      outline: none;
-    }
-
-    .btn-subscribe:active {
-      transform: scale(0.97);
     }
 
     .newsletter-feedback {
@@ -650,6 +584,7 @@
 
     /* ==========================================================================
        6. MINIMAL FOOTER
+       Copyright notice and quick inquiry email link.
        ========================================================================== */
     .minimal-footer {
       text-align: center;
@@ -680,18 +615,14 @@
       border-bottom-color: #EC4899;
     }
 
-    /* ==========================================================================
-       MOBILE RESPONSIVE TWEAKS (< 380px)
-       ========================================================================== */
+    /* Responsive adjustments for extremely narrow mobile screens */
     @media (max-width: 380px) {
       body {
         padding: 20px 12px 40px;
       }
-
       .newsletter-input-row {
         flex-direction: column;
       }
-
       .btn-subscribe {
         width: 100%;
       }
@@ -699,20 +630,19 @@
   </style>
 </head>
 <body>
-  <!-- Subtle Ambient Gallery Background Lighting -->
+  <!-- Ambient background lighting element -->
   <div class="ambient-glow" aria-hidden="true"></div>
 
-  <!-- Centered Mobile Container (max-width: 480px) -->
+  <!-- Centered container structuring the link-in-bio components -->
   <main class="app-container">
 
     <!-- ======================================================================
-         1. PROFILE HEADER
+         SECTION 1: PROFILE HEADER
          ====================================================================== -->
     <header class="profile-header reveal">
       <div class="avatar-ring">
         <div class="avatar-inner">
-          <!-- REPLACE THE SVG BELOW WITH YOUR OWN <img> TAG, e.g.:
-               <img src="https://yourdomain.com/avatar.jpg" alt="YOUR BRAND NAME Avatar" /> -->
+          <!-- Replace SVG below with an <img src="https://aenon.art/avatar.jpg" alt="ÆN0N.ART Avatar"> if you have a custom photo -->
           <svg viewBox="0 0 100 100" width="100" height="100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Artist Avatar Placeholder">
             <defs>
               <radialGradient id="avatarGrad" cx="35%" cy="28%" r="78%">
@@ -735,28 +665,24 @@
         </div>
       </div>
 
-      <h1 class="brand-title">YOUR BRAND NAME</h1>
+      <h1 class="brand-title">ÆN0N.ART</h1>
       <p class="brand-tagline">Visual Art &bull; Original Music &bull; Curated Vibes</p>
 
-      <!-- Minimalist SVG Social Media Icon Buttons -->
+      <!-- Social Media Icon Buttons -->
       <nav class="social-row" aria-label="Social Media Links">
-        <!-- Instagram -->
-        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram">
+        <!-- Instagram Button (Updated to point to instagram.aenon.art subdomain) -->
+        <a href="https://instagram.aenon.art" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <rect x="2.5" y="2.5" width="19" height="19" rx="5" />
             <circle cx="12" cy="12" r="4" />
             <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
           </svg>
         </a>
-
-        <!-- TikTok -->
         <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="TikTok">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
           </svg>
         </a>
-
-        <!-- Spotify -->
         <a href="https://open.spotify.com" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Spotify">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="12" cy="12" r="9.5" />
@@ -765,8 +691,6 @@
             <path d="M9.1 16c1.9-.5 4-.4 5.7.5" />
           </svg>
         </a>
-
-        <!-- YouTube -->
         <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="YouTube">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <rect x="2.5" y="5" width="19" height="14" rx="4" />
@@ -777,7 +701,7 @@
     </header>
 
     <!-- ======================================================================
-         2. PRIMARY FEATURED DROP CARD (TOP PRIORITY)
+         SECTION 2: PRIMARY FEATURED DROP CARD
          ====================================================================== -->
     <section class="glass-card featured-card reveal" aria-labelledby="featured-drop-title">
       <div class="featured-top-bar">
@@ -789,10 +713,7 @@
       </div>
 
       <div class="featured-body">
-        <!-- Square Artwork Thumbnail Placeholder -->
         <div class="artwork-thumb-wrap">
-          <!-- REPLACE THE SVG BELOW WITH YOUR SQUARE DROP ARTWORK IMAGE, e.g.:
-               <img src="https://yourdomain.com/featured-drop.jpg" alt="Limited Edition Print & Merch Collection" /> -->
           <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Featured Artwork Preview">
             <defs>
               <linearGradient id="artBg" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -820,9 +741,7 @@
             <circle cx="185" cy="175" r="150" fill="url(#pinkOrb)" />
             <circle cx="235" cy="205" r="135" fill="url(#blueOrb)" />
             <circle cx="200" cy="184" r="74" fill="none" stroke="url(#waveGrad)" stroke-width="2" stroke-opacity="0.85" />
-            <circle cx="200" cy="184" r="108" fill="none" stroke="#B8B3CC" stroke-width="0.9" stroke-opacity="0.28" stroke-dasharray="4 6" />
             <path d="M40 285 Q130 230 200 275 T360 255" fill="none" stroke="url(#waveGrad)" stroke-width="2.4" stroke-opacity="0.9" />
-            <path d="M40 310 Q145 265 215 300 T360 285" fill="none" stroke="#3B82F6" stroke-width="1.2" stroke-opacity="0.45" />
             <text x="200" y="362" text-anchor="middle" fill="#B8B3CC" font-family="sans-serif" font-size="11" letter-spacing="4">GALLERY EDITION 01</text>
           </svg>
         </div>
@@ -832,9 +751,10 @@
           <p class="featured-desc">Archival museum-grade gicl&eacute;e prints, heavyweight apparel, and custom vinyl pressings available for a limited window.</p>
         </div>
 
-        <a href="https://mybrand.com" target="_blank" rel="noopener noreferrer" class="btn-primary-cta">
+        <!-- Links directly to your verified Printify store subdomain -->
+        <a href="https://shop.aenon.art" target="_blank" rel="noopener noreferrer" class="btn-primary-cta">
           <span>Shop the Collection</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="17" height="17">
             <line x1="5" y1="12" x2="19" y2="12" />
             <polyline points="12 5 19 12 12 19" />
           </svg>
@@ -843,10 +763,10 @@
     </section>
 
     <!-- ======================================================================
-         3. STOREFRONT BUTTON
+         SECTION 3: STOREFRONT BUTTON (SHOP.AENON.ART)
          ====================================================================== -->
     <div class="reveal">
-      <a href="https://mybrand.com" target="_blank" rel="noopener noreferrer" class="btn-storefront">
+      <a href="https://shop.aenon.art" target="_blank" rel="noopener noreferrer" class="btn-storefront">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M6 7h12l1 13H5L6 7z" />
           <path d="M9 7V5a3 3 0 0 1 6 0v2" />
@@ -856,7 +776,7 @@
     </div>
 
     <!-- ======================================================================
-         4. MUSIC & SPOTIFY SECTION
+         SECTION 4: MUSIC & SPOTIFY EMBEDS SECTION
          ====================================================================== -->
     <section class="section-group reveal" aria-labelledby="listen-vibe-heading">
       <div class="section-subheader">
@@ -864,13 +784,9 @@
       </div>
 
       <div class="glass-card spotify-container">
-        <!-- EMBED 1: SPOTIFY ARTIST PROFILE / LATEST SINGLE -->
+        <!-- Spotify Latest Release Embed Slot -->
         <div class="spotify-slot">
           <span class="spotify-slot-label">Latest Release &amp; Artist Profile</span>
-          <!-- ================================================================
-               PASTE YOUR SPOTIFY ARTIST OR TRACK EMBED URL IN THE `src` BELOW
-               (In Spotify: Share -> Embed Track/Artist -> Copy src URL)
-               ================================================================ -->
           <iframe
             class="spotify-embed-frame"
             title="Spotify Artist Profile / Latest Single"
@@ -882,13 +798,9 @@
           </iframe>
         </div>
 
-        <!-- EMBED 2: CURATED VIBE PLAYLIST -->
+        <!-- Spotify Curated Playlist Embed Slot -->
         <div class="spotify-slot">
           <span class="spotify-slot-label">Curated Studio &amp; Vibe Playlist</span>
-          <!-- ================================================================
-               PASTE YOUR SPOTIFY PLAYLIST EMBED URL IN THE `src` BELOW
-               (In Spotify: Share -> Embed Playlist -> Copy src URL)
-               ================================================================ -->
           <iframe
             class="spotify-embed-frame"
             title="Spotify Curated Vibe Playlist"
@@ -903,7 +815,7 @@
     </section>
 
     <!-- ======================================================================
-         5. EMAIL NEWSLETTER FUNNEL BOX
+         SECTION 5: EMAIL NEWSLETTER FUNNEL BOX
          ====================================================================== -->
     <section class="glass-card newsletter-card reveal" aria-labelledby="newsletter-heading">
       <div class="newsletter-header">
@@ -911,7 +823,6 @@
         <p>Get early access to new art drops, exclusive prints, and unreleased tracks.</p>
       </div>
 
-      <!-- PASTE KIT / MAILERLITE EMBED CODE HERE -->
       <form id="newsletterForm" class="newsletter-form" novalidate>
         <div class="newsletter-input-row">
           <input
@@ -927,28 +838,26 @@
         </div>
         <div id="newsletterFeedback" class="newsletter-feedback" role="status" aria-live="polite"></div>
       </form>
-      <!-- END KIT / MAILERLITE EMBED CODE -->
     </section>
 
     <!-- ======================================================================
-         6. MINIMAL FOOTER
+         SECTION 6: MINIMAL FOOTER
          ====================================================================== -->
     <footer class="minimal-footer reveal">
       <div class="footer-links">
-        <a href="mailto:hello@mybrand.com?subject=Commission%20%2F%20Inquiry" class="footer-link">Contact / Commissions</a>
+        <a href="mailto:hello@aenon.art?subject=Commission%20%2F%20Inquiry" class="footer-link">Contact / Commissions</a>
       </div>
-      <p>&copy; 2026 Your Brand Name. All rights reserved.</p>
+      <p>&copy; 2026 ÆN0N.ART. All rights reserved.</p>
     </footer>
 
   </main>
 
+  <!-- ==========================================================================
+       JAVASCRIPT INTERACTIONS (Animations & Form Validation)
+       ========================================================================== -->
   <script>
-    /**
-     * Staggered entrance animation & interactive newsletter placeholder handler.
-     * Self-contained with zero external dependencies for clean Google Sites embedding.
-     */
     (function () {
-      // 1. Staggered reveal on load
+      // Staggered entrance animation trigger on load
       const revealElements = document.querySelectorAll('.reveal');
       revealElements.forEach((el, index) => {
         setTimeout(() => {
@@ -956,7 +865,7 @@
         }, 70 * index);
       });
 
-      // 2. Placeholder Newsletter Form Interaction
+      // Newsletter subscription form input validator logic
       const form = document.getElementById('newsletterForm');
       const emailInput = document.getElementById('subscriberEmail');
       const feedback = document.getElementById('newsletterFeedback');
