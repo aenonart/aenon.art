@@ -388,37 +388,40 @@
     }
 
     /* ==========================================================================
-       3. STOREFRONT BUTTON (Points to shop.aenon.art)
+       3. STOREFRONT BUTTON (SHOP.AENON.ART) - Made larger & more prominent
        ========================================================================== */
     .btn-storefront {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 12px;
       width: 100%;
-      padding: 16px 20px;
+      padding: 18px 24px; /* Increased vertical and horizontal padding */
       border-radius: var(--radius-lg);
       background: var(--bg-card);
-      border: 1px solid rgba(139, 92, 246, 0.34);
+      border: 1px solid rgba(139, 92, 246, 0.42); /* Slightly stronger border */
       color: var(--text-primary);
-      font-size: 0.95rem;
-      font-weight: 600;
+      font-size: 1.02rem; /* Slightly larger text size */
+      font-weight: 700; /* Bolder text for hierarchy */
+      letter-spacing: 0.015em;
       text-decoration: none;
       backdrop-filter: blur(16px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.42);
       transition: var(--transition-smooth);
     }
 
     .btn-storefront:hover,
     .btn-storefront:focus-visible {
-      background: linear-gradient(135deg, rgba(236, 72, 153, 0.14), rgba(139, 92, 246, 0.18), rgba(59, 130, 246, 0.16));
-      border-color: rgba(236, 72, 153, 0.62);
+      background: linear-gradient(135deg, rgba(236, 72, 153, 0.18), rgba(139, 92, 246, 0.22), rgba(59, 130, 246, 0.2));
+      border-color: rgba(236, 72, 153, 0.7);
       transform: translateY(-2px);
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.5), 0 0 24px rgba(139, 92, 246, 0.28);
       outline: none;
     }
 
     .btn-storefront svg {
-      width: 19px;
-      height: 19px;
+      width: 21px; /* Slightly larger icon */
+      height: 21px;
       color: #60A5FA;
     }
 
@@ -670,7 +673,7 @@
 
       <!-- Social Media Icon Buttons -->
       <nav class="social-row" aria-label="Social Media Links">
-        <!-- Instagram Button (Updated to point to instagram.aenon.art subdomain) -->
+        <!-- Instagram Button (Points to instagram.aenon.art subdomain) -->
         <a href="https://instagram.aenon.art" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <rect x="2.5" y="2.5" width="19" height="19" rx="5" />
@@ -763,7 +766,7 @@
     </section>
 
     <!-- ======================================================================
-         SECTION 3: STOREFRONT BUTTON (SHOP.AENON.ART)
+         SECTION 3: STOREFRONT BUTTON (SHOP.AENON.ART) - Enhanced & Enlarged
          ====================================================================== -->
     <div class="reveal">
       <a href="https://shop.aenon.art" target="_blank" rel="noopener noreferrer" class="btn-storefront">
